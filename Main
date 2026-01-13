@@ -1,0 +1,266 @@
+local plr = game:GetService("Players").LocalPlayer
+local msg = Instance.new("Hint", workspace)
+
+local buttons = {
+	[1] = {
+		Index = 1;
+		Name = "TP Silver Rank";
+		Color = Color3.fromRGB(170, 170, 170);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("4").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[2] = {
+		Index = 2;
+		Name = "TP Gold Rank";
+		Color = Color3.fromRGB(255, 170, 0);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("7").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[3] = {
+		Index = 3;
+		Name = "TP Diamond Rank";
+		Color = Color3.fromRGB(15, 199, 255);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("10").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[4] = {
+		Index = 4;
+		Name = "TP Mythic Rank";
+		Color = Color3.fromRGB(204, 0, 255);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("13").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[5] = {
+		Index = 5;
+		Name = "TP LEGENDARY Rank";
+		Color = Color3.fromRGB(255, 0, 0);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("16").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[6] = {
+		Index = 6;
+		Name = "TP MASTER Rank";
+		Color = Color3.fromRGB(255, 180, 114);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("19").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[7] = {
+		Index = 7;
+		Name = "TP PRO Rank";
+		Color = Color3.fromRGB(81, 255, 0);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("21").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[8] = {
+		Index = 8;
+		Name = "TP FINAL RANK";
+		Color = Color3.fromRGB(150, 0, 0);
+		OnClicked = function()
+			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("24").CFrame + Vector3.new(0, 5, 0)
+		end,
+	};
+	
+	[9] = {
+		Index = 9;
+		Name = "Infinite Jump";
+		Color = Color3.fromRGB(255, 255, 255);
+		OnClicked = function()
+			if plr.Character:FindFirstChildOfClass("Humanoid") then
+				game:GetService("UserInputService").InputBegan:Connect(function(key)
+					if key.KeyCode == Enum.KeyCode.Space then
+						plr.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 150, 0)
+					end
+				end)
+			end
+		end,
+	};
+	
+	[10] = {
+		Index = 9.001;
+		Name = "Anti-Void";
+		Color = Color3.fromRGB(255, 255, 255);
+		OnClicked = function()
+			if not workspace:FindFirstChild("AntiVoid") then
+				local part = Instance.new("Part", workspace);
+				
+				part.Anchored = true;
+				part.Size = Vector3.new(2048, 1, 2048);
+				part.Transparency = 0.6;
+				part.CFrame = plr.Character.PrimaryPart.CFrame - Vector3.new(0, 6, 0);
+				part.Name = "AntiVoid"
+				
+				local highestY = 0
+				
+				highestY = plr.Character.PrimaryPart.Position.Y
+				
+				while task.wait() do
+					if not workspace:FindFirstChild("AntiVoid") then break end
+					
+					if plr.Character.PrimaryPart.Position.Y > highestY then
+						highestY = plr.Character.PrimaryPart.Position.Y
+						part.CFrame = plr.Character.PrimaryPart.CFrame - Vector3.new(0, 6, 0)
+					end
+				end
+			else
+				if workspace:FindFirstChild("AntiVoid") then
+					workspace:WaitForChild("AntiVoid"):Destroy()
+				end
+			end
+		end,
+	};
+	
+	[11] = {
+		Index = 9.002;
+		Name = "Fling Others!";
+		Color = Color3.fromRGB(255, 255, 255);
+		OnClicked = function()
+			for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+				if v == plr then continue end
+				if not v.Character.PrimaryPart then continue end
+				
+				v.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(20000, 20000, 20000)
+			end
+		end,
+	};
+	
+	[12] = {
+		Index = 9.003;
+		Name = "JC WHY DID U DO THIS?????";
+		Color = Color3.fromRGB(255, 255, 255);
+		OnClicked = function()
+			local p = Instance.new("Part", workspace)
+			
+			p.Size = Vector3.new(2048, 2, 2048);
+			p.BrickColor = BrickColor.new("Really black");
+			p.Name = "Void";
+			p.CFrame = plr.Character.PrimaryPart.CFrame - Vector3.new(0, 100, 0)
+			p.CanCollide = false;
+			p.Anchored = true;
+			
+			p.Touched:Connect(function(hit)
+				if hit then
+					if game:GetService("Players"):FindFirstChild(tostring(hit.Parent.Name)) then
+						hit.AssemblyLinearVelocity = Vector3.new(10000, 10000, 10000)
+					end
+				end
+			end)
+			
+			repeat
+				p.CFrame *= Vector3.new(0, 0.01, 0)
+			until plr.Character:FindFirstChildOfClass("Humanoid").Health <= 0 or not p or p.Position.Y >= 10000
+			
+			if p then
+				p:Destroy()
+			end
+		end,
+	}
+}
+
+task.spawn(function()
+	if game.PlaceId ~= 91224297006236 then 
+		warn("CUBEWARE: INVALID PLACE ID.")
+		
+		task.spawn(function()
+			while task.wait() do
+				msg.Text = "Invalid place id. Now teleporting..."
+				task.wait()
+			end
+		end)
+		
+		game:GetService("TeleportService"):Teleport(91224297006236, plr)
+		game:GetService("Debris"):AddItem(msg, 20)
+
+		return
+	end
+end)
+
+msg.Text = "Loading... Please wait!"
+
+repeat task.wait() until game:IsLoaded()
+
+if msg then
+	msg:Destroy()
+end
+
+pcall(function()
+	local screenGui = Instance.new("ScreenGui", plr.PlayerGui)
+	
+	screenGui.Name = "ExploitGui"
+	screenGui.IgnoreGuiInset = true
+	screenGui.Enabled = true
+	screenGui.ResetOnSpawn = false;
+	
+	local frame = Instance.new("Frame", screenGui)
+	
+	frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+	frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	frame.Name = "MainFrame";
+	
+	Instance.new("UICorner", frame) -- Add rounder corners
+	
+	local text = Instance.new("TextLabel", frame)
+	
+	text.ZIndex = 10;
+	text.Size = UDim2.new(0.5, 0, 0.125, 0)
+	text.Position = UDim2.new(0.5, 0, 0.2, 0)
+	text.AnchorPoint = Vector2.new(0.5, 0.5)
+	text.BackgroundTransparency = 1
+	text.TextScaled = true;
+	text.RichText = true
+	text.Text = "CubeWare! (<font color='#00ff00'>Best</font> Closet Cheating Script)"
+	
+	local scrollingFrame = Instance.new("ScrollingFrame", frame);
+	
+	scrollingFrame.Size = UDim2.new(1, 0, 1, 0);
+	scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY;
+	scrollingFrame.BackgroundTransparency = 1;
+	scrollingFrame.Position = UDim2.new(0.5, 0, 0.5, 0);
+	scrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5);
+	
+	local uiList = Instance.new("UIListLayout", scrollingFrame);
+	
+	uiList.Wraps = true;
+	uiList.Padding = UDim.new(0, 10);
+	uiList.SortOrder = Enum.SortOrder.Name;
+	uiList.VerticalAlignment = Enum.VerticalAlignment.Center;
+	uiList.FillDirection = Enum.FillDirection.Horizontal;
+	
+	task.spawn(function()
+		for _, v in pairs(buttons) do
+			local button = Instance.new("TextButton", scrollingFrame);
+			
+			button.Size = UDim2.new(0.25, 0, 0.1, 0);
+			button.Text = tostring(v["Name"]);
+			button.Name = tostring(v["Index"]).."_"..tostring(button.Text)
+			button.BackgroundColor3 = v.Color;
+			button.TextScaled = true;
+			
+			button.MouseButton1Down:Connect(function()
+				v["OnClicked"]()
+			end)
+			
+			Instance.new("UICorner", button);
+		end
+	end)
+	
+	game:GetService("UserInputService").InputBegan:Connect(function(key)
+		if key.KeyCode == Enum.KeyCode.RightShift then
+			screenGui.Enabled = not screenGui.Enabled
+		end
+	end)
+end)
