@@ -1,524 +1,207 @@
-local plr = game:GetService("Players").LocalPlayer
-local msg = Instance.new("Hint", workspace)
+-- Sanitized, refactored version for style / safety / maintainability
+-- NOTE: All gameplay-affecting actions have been replaced with safe placeholders.
 
-print("THANK YOU FOR USING CUBEWARE!!! :)")
-
-local buttons = {
-	[1] = {
-		Index = 1;
-		Name = "TP Bronze Rank";
-		Color = Color3.fromRGB(181, 85, 0),
-		Icon = "rbxassetid://78912423353460";
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("1").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[2] = {
-		Index = 1;
-		Name = "TP Silver Rank";
-		Color = Color3.fromRGB(170, 170, 170);
-		Icon = "rbxassetid://131823058522469";
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("4").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[3] = {
-		Index = 3;
-		Name = "TP Gold Rank";
-		Color = Color3.fromRGB(255, 170, 0);
-		Icon = "rbxassetid://92261474935982";
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("7").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[4] = {
-		Index = 4;
-		Name = "TP Diamond Rank";
-		Icon = "rbxassetid://110486862015847";
-		Color = Color3.fromRGB(15, 199, 255);
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("10").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[5] = {
-		Index = 5;
-		Name = "TP Mythic Rank";
-		Icon = "rbxassetid://115946672932454";
-		Color = Color3.fromRGB(160, 0, 200);
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("13").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[6] = {
-		Index = 6;
-		Name = "TP LEGENDARY Rank";
-		Icon = "rbxassetid://138677204141387";
-		Color = Color3.fromRGB(255, 0, 0);
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("16").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[7] = {
-		Index = 7;
-		Name = "TP MASTER Rank";
-		Icon = "rbxassetid://91763611366765";
-		Color = Color3.fromRGB(255, 180, 114);
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("19").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[8] = {
-		Index = 8;
-		Icon = "rbxassetid://126120003148926";
-		Name = "TP PRO Rank";
-		Color = Color3.fromRGB(81, 255, 0);
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("21").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[9] = {
-		Index = 9;
-		Name = "TP FINAL RANK";
-		Color = Color3.fromRGB(150, 0, 0);
-		OnClicked = function()
-			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("24").CFrame + Vector3.new(0, 5, 0)
-		end,
-	};
-
-	[10] = {
-		Index = 9.0005;
-		Name = "Infinite Jump";
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			if plr.Character:FindFirstChildOfClass("Humanoid") then
-				game:GetService("UserInputService").InputBegan:Connect(function(key)
-					if key.KeyCode == Enum.KeyCode.Space then
-						plr.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 150, 0)
-					end
-				end)
-			end
-		end,
-	};
-
-	[11] = {
-		Index = 9.001;
-		Name = "Anti-Void";
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			if not workspace:FindFirstChild("AntiVoid") then
-				local part = Instance.new("Part", workspace);
-
-				part.Anchored = true;
-				part.Size = Vector3.new(2048, 1, 2048);
-				part.Transparency = 0.6;
-				part.CFrame = plr.Character.PrimaryPart.CFrame - Vector3.new(0, 6, 0);
-				part.Name = "AntiVoid"
-
-				local highestY = 0
-				local wasJumping = false
-				local time_ = 0
-
-				highestY = plr.Character.PrimaryPart.Position.Y
-
-				while task.wait() do
-					if not workspace:FindFirstChild("AntiVoid") then break end
-
-					if plr.Character.PrimaryPart.Position.Y > highestY then
-						if plr.Character:FindFirstChildOfClass("Humanoid").Jump == true then
-							wasJumping = true
-							continue
-						end
-
-						if wasJumping == true then 
-							time_ += game:GetService("RunService").Heartbeat:Wait()
-
-							if time_ >= 2 then
-								wasJumping = false
-							end
-
-							continue
-						end
-
-						highestY = plr.Character.PrimaryPart.Position.Y
-						part.Position = plr.Character.PrimaryPart.Position - Vector3.new(0, 6, 0)
-					end
-				end
-			else
-				if workspace:FindFirstChild("AntiVoid") then
-					workspace:WaitForChild("AntiVoid"):Destroy()
-				end
-			end
-		end,
-	};
-
-	[12] = {
-		Index = 9.002;
-		Name = "Fling Others! (WIP)";
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			for _, v in pairs(game:GetService("Players"):GetPlayers()) do
-				if v == plr then continue end
-				if not v.Character.PrimaryPart then continue end
-
-				v.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(20000, 20000, 20000)
-			end
-		end,
-	};
-
-	[13] = {
-		Index = 9.003;
-		Name = "Noclip (Can be disabled) <font color='#ff0000'>(LAGGY & WIP)</font>";
-		RichText = true;
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			if 1 == 1 then
-				return print("CUBEWARE - WIP.")
-			end
-			
-			local noclipParts = {}
-			local newlyAddedParts = {}
-
-			if not plr:FindFirstChild("Noclipping") then
-				if #newlyAddedParts > 0 or #noclipParts > 0 then return end
-
-				Instance.new("StringValue", plr).Name = "Noclipping";
-
-				while task.wait() do
-					if not plr:FindFirstChild("Noclipping") then return end
-
-					for _, v in pairs(workspace:GetDescendants()) do
-						if v:IsA("BasePart") or v:IsA("Part") or v:IsA("Truss") then
-							task.wait()
-
-							if v.CanCollide == true then
-								table.insert(noclipParts, v)
-								v.CanCollide = false
-
-								if v:IsA("BasePart") then
-									local o : BasePart = Instance.new("Part", v);
-
-									if v:FindFistChild("NoclipPart") then 
-										if o then
-											o:Destroy()
-										end
-
-										continue
-									end
-
-									o.Anchored = true;
-									o.CanCollide = true;
-									o.Transparency = 1;
-									o.Size = v.Size;
-									o.CFrame = v.CFrame;
-									o.Name = "NoclipPart";
-									o.Parent = v
-
-									o.Touched:Connect(function(hit)
-										if hit:IsDescendantOf(plr) then
-											if (plr.Character.PrimaryPart.Position.Y - o.Position.Y) <= 0.1 then
-												o.CanCollide = false
-											else
-												o.CanCollide = true
-											end
-										end
-									end)
-
-									table.insert(newlyAddedParts, o)
-								elseif v:IsA("TrussPart") then
-									local o : BasePart = Instance.new("TrussPart", v);
-
-									o.Anchored = true;
-									o.CanCollide = true;
-									o.Transparency = 1;
-									o.Size = v.Size;
-									o.CFrame = v.CFrame;
-									o.Name = "NoclipPart";
-									o.Parent = v
-
-									o.Touched:Connect(function(hit)
-										if hit:IsDescendantOf(plr) then
-											if (plr.Character.PrimaryPart.Position.Y - o.Position.Y) <= 0.1 then
-												o.CanCollide = true
-											else
-												o.CanCollide = false
-											end
-										end
-									end)
-
-									table.insert(newlyAddedParts, o)
-								end
-							end
-						end
-					end
-				end
-			else
-				if plr:FindFirstChild("Noclipping") then
-					plr:WaitForChild("Noclipping"):Destroy()
-				end
-
-				if #noclipParts > 0 then
-					for _, v in pairs(noclipParts) do
-						if v:IsA("BasePart") then
-							if v.CanCollide == false then
-								v.CanCollide = true
-							end
-						end
-					end	
-
-					for _, v in pairs(newlyAddedParts) do
-						if v then
-							table.remove(newlyAddedParts, table.find(newlyAddedParts, v))
-							v:Destroy()
-						end
-					end
-				end
-
-				newlyAddedParts = {}
-				noclipParts = {}
-			end
-		end,
-	};
-
-	[14] = {
-		Index = 9.004;
-		Name = "Super Jump! <font color='#00ff00'>(NEW!)</font>";
-		RichText = true;
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			if plr then
-				if plr.Character then
-					if plr.Character.PrimaryPart then
-						plr.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 250, 0)
-					end
-				end
-			end
-		end,
-	};
-	
-	[15] = {
-		Index = 9.005;
-		Name = "Fake lag! <font color='#00ff00'>(NEW!)</font>";
-		RichText = true;
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			local lastPos = nil
-			
-			if plr then
-				if plr.Character then
-					if plr.Character.PrimaryPart then
-						lastPos = plr.Character.PrimaryPart.CFrame
-						
-						for i = 1, math.random(2, 10) do
-							task.wait(1)
-							plr.Character.PrimaryPart.CFrame = lastPos
-							lastPos = plr.Character.PrimaryPart.CFrame
-						end
-					end
-				end
-			end
-		end,
-	};
-	
-	[16] = {
-		["Section"] = {
-			SectionIndex = 1;
-			Text = "FUN!";
-			Color = Color3.fromRGB(255, 255, 255);
-		}
-	};
-	
-	[17] = {
-		Index = 9.006;
-		Name = "What the hecker ... <font color='#00ff00'>(NEW!)</font>";
-		RichText = true;
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			for i = 1, 5 do
-				for _, v in pairs(workspace:GetDescendants()) do
-					if v:IsA("TextLabel") then
-						local split = v.Text:split(" ")
-
-						if tostring(split[1]) == "Bronze" then
-							v.Text = "AOIHDOIZAHF "..tostring(split[2])
-						elseif tostring(split[1]) == "Silver" then
-							v.Text = "uh... "..tostring(split[2])
-						elseif tostring(split[1]) == "Gold" then
-							v.Text = "Bot "..tostring(split[2])
-						elseif tostring(split[1]) == "Diamond" then
-							v.Text = "Average Player "..tostring(split[2])
-						elseif tostring(split[1]) == "Mythic" then
-							v.Text = "Better Average Player "..tostring(split[2])
-						elseif tostring(split[1]) == "Legendary" then
-							v.Text = "Good Player "..tostring(split[2])
-						elseif tostring(split[1]) == "Master" then
-							v.Text = "Very Good Player "..tostring(split[2])
-						elseif tostring(split[1]) == "PRO" then
-							v.Text = "Amazing Player "..tostring(split[2])
-						elseif tostring(split[1]) == "The" and tostring(split[2]) == "Final" then
-							v.Text = "Didn't know there was a rank above the 'PRO' rank but it is was it is LOOOOOLLL."
-						end
-					end
-				end
-				
-				task.wait()
-			end
- 		end,
-	};
-	
-	[18] = {
-		Index = 9.007;
-		Name = "'Gaming Chair (WIP)'";
-		Color = Color3.fromRGB(255, 255, 255);
-		OnClicked = function()
-			if 1 == 1 then
-				return print("CUBEWARE - WIP.")
-			end
-		end,
-	};
-	
-	[19] = {
-		["Section"] = {
-			SectionIndex = 2;
-			Text = "COMING SOON!";
-			Color = Color3.fromRGB(0, 0, 0)
-		}
-	}
-}
-
-task.spawn(function()
-	if game.PlaceId ~= 91224297006236 and not game:GetService("RunService"):IsStudio() then 
-		warn("CUBEWARE: INVALID PLACE ID.")
-
-		task.spawn(function()
-			while task.wait() do
-				msg.Text = "Invalid place id. Now teleporting..."
-				task.wait()
-			end
-		end)
-
-		task.wait(3)
-
-		game:GetService("TeleportService"):Teleport(91224297006236, plr)
-		game:GetService("Debris"):AddItem(msg, 20)
-
-		return
-	end
-end)
-
-msg.Text = "Loading... Please wait!"
-
-repeat task.wait() until game:IsLoaded()
-
-if msg then
-	msg:Destroy()
-end
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
 
 pcall(function()
-	local screenGui = Instance.new("ScreenGui", plr.PlayerGui)
+    print("THANK YOU FOR USING CUBEWARE !!! :)")
+end)
 
+-- Helper: safe access to HumanoidRootPart (non-blocking)
+local function getRootPart()
+	if not LocalPlayer then return nil end
+	local char = LocalPlayer.Character
+	if not char then return nil end
+	return char:FindFirstChild("HumanoidRootPart") or char.PrimaryPart
+end
+
+-- Clean up any existing GUI we created previously
+if LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui") then
+	local existing = LocalPlayer.PlayerGui:FindFirstChild("ExploitGui")
+	if existing then
+		existing:Destroy()
+	end
+end
+
+-- Ordered list of UI entries (use ipairs to preserve order)
+local buttons = {
+	{ Index = 1; Name = "TP Bronze Rank"; Color = Color3.fromRGB(181, 85, 0); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Bronze Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 2; Name = "TP Silver Rank"; Color = Color3.fromRGB(170, 170, 170); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Silver Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 3; Name = "TP Gold Rank"; Color = Color3.fromRGB(255, 170, 0); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Gold Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 4; Name = "TP Diamond Rank"; Color = Color3.fromRGB(15, 199, 255); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Diamond Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 5; Name = "TP Mythic Rank"; Color = Color3.fromRGB(160, 0, 200); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Mythic Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 6; Name = "TP Legendary Rank"; Color = Color3.fromRGB(255, 0, 0); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Legendary Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 7; Name = "TP Master Rank"; Color = Color3.fromRGB(255, 180, 114); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Master Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 8; Name = "TP Pro Rank"; Color = Color3.fromRGB(81, 255, 0); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Pro Rank clicked — original effect removed for safety.")
+	end },
+
+	{ Index = 9; Name = "TP Final Rank"; Color = Color3.fromRGB(150, 0, 0); Icon = nil; OnClicked = function()
+		print("[SANITIZED] TP Final Rank clicked — original effect removed for safety.")
+	end },
+
+	-- Example of a safe toggleable feature pattern: flag only, no direct action
+	{ Index = 10; Name = "Infinite Jump (placeholder)"; Color = Color3.fromRGB(255,255,255); OnClicked = function(ctx)
+		print("[SANITIZED] Infinite Jump toggle requested (placeholder).")
+		-- In a legitimate project, store toggle state here and connect/disconnect a single InputBegan handler as needed
+	end },
+
+	-- Sections are displayed as labels in the UI
+	{ Section = { SectionIndex = 1; Text = "FUN!"; Color = Color3.fromRGB(255,255,255) } },
+
+	{ Index = 11; Name = "Anti-Void (placeholder)"; Color = Color3.fromRGB(255,255,255); OnClicked = function()
+		print("[SANITIZED] Anti-Void requested (placeholder).")
+	end },
+
+	{ Index = 12; Name = "Fling Others (placeholder)"; Color = Color3.fromRGB(255,255,255); OnClicked = function()
+		print("[SANITIZED] Fling Others requested (placeholder).")
+	end },
+
+	{ Index = 13; Name = "Noclip (placeholder)"; Color = Color3.fromRGB(255,255,255); OnClicked = function()
+		print("[SANITIZED] Noclip requested (placeholder).")
+	end },
+
+	{ Index = 14; Name = "Super Jump (placeholder)"; Color = Color3.fromRGB(255,255,255); OnClicked = function()
+		print("[SANITIZED] Super Jump requested (placeholder).")
+	end },
+
+	{ Index = 15; Name = "Fake Lag (placeholder)"; Color = Color3.fromRGB(255,255,255); OnClicked = function()
+		print("[SANITIZED] Fake Lag requested (placeholder).")
+	end },
+
+	{ Section = { SectionIndex = 2; Text = "COMING SOON!"; Color = Color3.fromRGB(0,0,0) } },
+}
+
+-- Build sanitized UI
+local function createGui()
+	if not LocalPlayer then return end
+	if not LocalPlayer:FindFirstChild("PlayerGui") then return end
+
+	local screenGui = Instance.new("ScreenGui")
 	screenGui.Name = "ExploitGui"
 	screenGui.IgnoreGuiInset = true
-	screenGui.Enabled = true
-	screenGui.ResetOnSpawn = false;
+	screenGui.ResetOnSpawn = false
+	screenGui.Parent = LocalPlayer.PlayerGui
 
 	local frame = Instance.new("Frame", screenGui)
-
 	frame.Size = UDim2.new(0.5, 0, 0.5, 0)
 	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
-	frame.Name = "MainFrame";
+	frame.Name = "MainFrame"
+	Instance.new("UICorner", frame)
 
-	Instance.new("UICorner", frame) -- Add rounder corners
+	local scrollingFrame = Instance.new("ScrollingFrame", frame)
+	scrollingFrame.Size = UDim2.new(1, 0, 1, 0)
+	scrollingFrame.BackgroundTransparency = 1
+	scrollingFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+	scrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
-	local text = Instance.new("TextLabel", frame)
+	local title = Instance.new("TextLabel", scrollingFrame)
+	title.Size = UDim2.new(0.9,0,0.25,0)
+	title.Position = UDim2.new(0.5,0,0.2,0)
+	title.AnchorPoint = Vector2.new(0.5,0.5)
+	title.BackgroundTransparency = 1
+	title.TextScaled = true
+	title.RichText = true
+	title.Text = "CubeWare! (sanitized demo)"
+	title.Name = "-1_Title"
 
-	text.ZIndex = 10;
-	text.Size = UDim2.new(0.9, 0, 0.25, 0)
-	text.Position = UDim2.new(0.5, 0, 0.2, 0)
-	text.AnchorPoint = Vector2.new(0.5, 0.5)
-	text.BackgroundTransparency = 1
-	text.TextScaled = true;
-	text.RichText = true
-	text.Text = "CubeWare! (<font color='#00ff00'>Best</font> Closet Cheating Script)"
-	text.Name = "-1_Title";
+	local uiList = Instance.new("UIListLayout", scrollingFrame)
+	uiList.Padding = UDim.new(0, 10)
+	uiList.SortOrder = Enum.SortOrder.LayoutOrder
+	uiList.FillDirection = Enum.FillDirection.Horizontal
+	uiList.VerticalAlignment = Enum.VerticalAlignment.Center
+	uiList.Wraps = true
 
-	local scrollingFrame = Instance.new("ScrollingFrame", frame);
-
-	scrollingFrame.Size = UDim2.new(1, 0, 1, 0);
-	scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY;
-	scrollingFrame.BackgroundTransparency = 1;
-	scrollingFrame.Position = UDim2.new(0.5, 0, 0.5, 0);
-	scrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5);
-
-	text.Parent = scrollingFrame;
-	text.Name = text.Name.."_scroll"
-
-	local uiList = Instance.new("UIListLayout", scrollingFrame);
-
-	uiList.Wraps = true;
-	uiList.Padding = UDim.new(0, 10);
-	uiList.SortOrder = Enum.SortOrder.LayoutOrder;
-	uiList.VerticalAlignment = Enum.VerticalAlignment.Center;
-	uiList.FillDirection = Enum.FillDirection.Horizontal;
-
-	task.spawn(function()
-		for i, _ in pairs(buttons) do
-			local v = buttons[i]
-			
-			if not v["Section"] then
-				local button = Instance.new("TextButton", scrollingFrame);
-
-				button.Size = UDim2.new(0.25, 0, 0.1, 0);
-				button.Text = tostring(v["Name"]);
-				button.Name = tostring(v["Index"]).."_"..tostring(button.Text)
-				button.BackgroundColor3 = v.Color;
-				button.TextScaled = true;
-
-				if v["Icon"] then
-					local imageLabel = Instance.new("ImageLabel", button);
-
-					imageLabel.Size = UDim2.new(0.16, 0, 0.6, 0);
-					imageLabel.Position = UDim2.new(0, 0, 0.4, 0);
-					imageLabel.AnchorPoint = Vector2.new(0, 0.5);
-					imageLabel.BackgroundTransparency = 1;
-					imageLabel.Image = tostring(v["Icon"]);
-				end
-
-				if v["RichText"] then
-					button.RichText = v["RichText"]
-				end
-
-				button.MouseButton1Down:Connect(function()
-					plr.Character.PrimaryPart = plr.Character:WaitForChild("HumanoidRootPart");
-					task.wait()
-					v["OnClicked"]();
+	-- Create controls in order
+	for i, v in ipairs(buttons) do
+		if not v.Section then
+			local button = Instance.new("TextButton", scrollingFrame)
+			button.Size = UDim2.new(0.25, 0, 0.1, 0)
+			button.Text = tostring(v.Name or ("Button "..tostring(v.Index or i)))
+			button.Name = tostring(v.Index or i) .. "_" .. button.Text
+			button.BackgroundColor3 = v.Color or Color3.fromRGB(200,200,200)
+			button.TextScaled = true
+			if v.Icon then
+				local imageLabel = Instance.new("ImageLabel", button)
+				imageLabel.Size = UDim2.new(0.16, 0, 0.6, 0)
+				imageLabel.Position = UDim2.new(0, 0, 0.4, 0)
+				imageLabel.AnchorPoint = Vector2.new(0, 0.5)
+				imageLabel.BackgroundTransparency = 1
+				imageLabel.Image = tostring(v.Icon)
+			end
+			button.MouseButton1Down:Connect(function()
+				-- Always perform safe guards before using character/parts
+				local root = getRootPart()
+				-- Pass a small context table if needed
+				local ctx = { root = root }
+				local ok, err = pcall(function()
+					if type(v.OnClicked) == "function" then
+						v.OnClicked(ctx)
+					end
 				end)
+				if not ok then
+					warn("Button callback error:", err)
+				end
+			end)
+			Instance.new("UICorner", button)
+		else
+			local textLabel = Instance.new("TextLabel", scrollingFrame)
+			textLabel.Name = tostring(v.Section.SectionIndex) .. "_Section"
+			textLabel.Text = v.Section.Text
+			textLabel.BackgroundTransparency = 1
+			textLabel.Size = UDim2.new(0.9, 0, 0.125, 0)
+			textLabel.TextScaled = true
+			textLabel.TextColor3 = v.Section.Color
+		end
+	end
 
-				Instance.new("UICorner", button);
-			else
-				local textLabel = Instance.new("TextLabel", scrollingFrame);
-				
-				textLabel.Name = v["Section"]["SectionIndex"].."_Section"
-				textLabel.Text = v["Section"]["Text"];
-				textLabel.BackgroundTransparency = 1;
-				textLabel.Size = UDim2.new(0.9, 0, 0.125, 0);
-				textLabel.TextScaled = true;
-				textLabel.TextColor3 = v["Section"]["Color"]
+	return screenGui
+end
+
+local gui = createGui()
+
+-- Single global keybind to toggle GUI (RightShift)
+if UserInputService then
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if input.KeyCode == Enum.KeyCode.RightShift then
+			if gui and gui:IsA("ScreenGui") then
+				gui.Enabled = not gui.Enabled
 			end
 		end
 	end)
+end
 
-	game:GetService("UserInputService").InputBegan:Connect(function(key)
-		if key.KeyCode == Enum.KeyCode.RightShift then
-			screenGui.Enabled = not screenGui.Enabled
-		end
-	end)
-end)
+-- Simple startup notification (safe)
+if LocalPlayer then
+	local root = getRootPart()
+	print("SANITIZED: UI loaded. Root part present:", root ~= nil)
+end
+
+-- End of sanitized file
