@@ -1,3 +1,6 @@
+local plr = game:GetService("Players").LocalPlayer
+local msg = Instance.new("Hint", workspace)
+
 local buttons = {
 	[1] = {
 		Index = 1;
@@ -18,9 +21,6 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("4").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[2] = {
-		Index = 2;
 
 	[3] = {
 		Index = 3;
@@ -31,9 +31,6 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("7").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[3] = {
-		Index = 3;
 
 	[4] = {
 		Index = 4;
@@ -44,9 +41,6 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("10").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[4] = {
-		Index = 4;
 
 	[5] = {
 		Index = 5;
@@ -59,9 +53,6 @@ local buttons = {
 		end,
 	};
 	
-	[5] = {
-		Index = 5;
-
 	[6] = {
 		Index = 6;
 		Name = "TP LEGENDARY Rank";
@@ -71,9 +62,6 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("16").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[6] = {
-		Index = 6;
 
 	[7] = {
 		Index = 7;
@@ -84,9 +72,6 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("19").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[7] = {
-		Index = 7;
 
 	[8] = {
 		Index = 8;
@@ -97,9 +82,6 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("21").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[8] = {
-		Index = 8;
 
 	[9] = {
 		Index = 9;
@@ -109,21 +91,19 @@ local buttons = {
 			plr.Character.PrimaryPart.CFrame = workspace:WaitForChild("PointFolder"):WaitForChild("24").CFrame + Vector3.new(0, 5, 0)
 		end,
 	};
-	
-	[9] = {
-		Index = 9;
 
 	[10] = {
 		Index = 9.0005;
 		Name = "Infinite Jump";
 		Color = Color3.fromRGB(255, 255, 255);
 		OnClicked = function()
-@@ -88,31 +105,48 @@ local buttons = {
-			end
+			game:GetService("UserInputService").InputBegan:Connect(function(key)
+				if key.KeyCode == Enum.KeyCode.Space then
+					plr.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 100, 0)
+				end
+			end)
 		end,
 	};
-	
-	[10] = {
 
 	[11] = {
 		Index = 9.001;
@@ -175,12 +155,12 @@ local buttons = {
 					end
 				end
 			else
-@@ -122,33 +156,254 @@ local buttons = {
+				if workspace:FindFirstChild("AntiVoid") then
+					workspace:WaitForChild("AntiVoid"):Destroy()
+				end
 			end
 		end,
 	};
-	
-	[11] = {
 
 	[12] = {
 		Index = 9.002;
@@ -418,7 +398,6 @@ local buttons = {
 }
 
 task.spawn(function()
-	if game.PlaceId ~= 91224297006236 then 
 	if game.PlaceId ~= 91224297006236 and not game:GetService("RunService"):IsStudio() then 
 		warn("CUBEWARE: INVALID PLACE ID.")
 		
@@ -435,8 +414,8 @@ task.spawn(function()
 
 		game:GetService("TeleportService"):Teleport(91224297006236, plr)
 		game:GetService("Debris"):AddItem(msg, 20)
-
-@@ -166,66 +421,99 @@ end
+	end
+end)
 
 pcall(function()
 	local screenGui = Instance.new("ScreenGui", plr.PlayerGui)
@@ -500,18 +479,6 @@ pcall(function()
 	
 
 	task.spawn(function()
-		for _, v in pairs(buttons) do
-			local button = Instance.new("TextButton", scrollingFrame);
-			
-			button.Size = UDim2.new(0.25, 0, 0.1, 0);
-			button.Text = tostring(v["Name"]);
-			button.Name = tostring(v["Index"]).."_"..tostring(button.Text)
-			button.BackgroundColor3 = v.Color;
-			button.TextScaled = true;
-			
-			button.MouseButton1Down:Connect(function()
-				v["OnClicked"]()
-			end)
 		for i, _ in pairs(buttons) do
 			local v = buttons[i]
 
