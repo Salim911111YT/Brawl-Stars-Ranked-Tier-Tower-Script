@@ -1,6 +1,8 @@
 local plr = game:GetService("Players").LocalPlayer
 local msg = Instance.new("Hint", workspace)
 
+print("THANK YOU FOR USING CUBEWARE!!! :)")
+
 local buttons = {
 	[1] = {
 		Index = 1;
